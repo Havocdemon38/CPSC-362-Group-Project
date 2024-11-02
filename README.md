@@ -1,4 +1,4 @@
-# Shape Escape
+# 🔺 Shape Escape 🟦
 
 ### A simple 2D platformer game developed in Unity.
 
