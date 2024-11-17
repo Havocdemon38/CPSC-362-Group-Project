@@ -34,5 +34,5 @@ jobs:
     - name: Build and run Roslyn analyzers
       working-directory: "CPSC 362 Group Project V1" 
       run: |
-        ls  # List files in this directory to confirm the .sln file is there
-        dotnet build "CPSC 362 Group Project V1.sln"--no-restore -warnaserror 
+        ls
+        dotnet build "CPSC 362 Group Project V1.sln" --no-restore -warnaserror 
