@@ -23,7 +23,7 @@ jobs:
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '9.0'
+        dotnet-version: '6.0'
 
     - name: Install dependencies
       working-directory: "CPSC 362 Group Project V1" 
