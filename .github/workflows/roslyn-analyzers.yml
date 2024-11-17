@@ -26,13 +26,13 @@ jobs:
         dotnet-version: '9.0'
 
     - name: Install dependencies
-      working-directory: "CPSC 362 Group Project V1"  # Correct relative path to subfolder
+      working-directory: "CPSC 362 Group Project V1" 
       run: |
         ls  # List files in this directory to confirm the .sln file is there
-        dotnet restore "CPSC 362 Group Project V1.sln"  # Use the .sln file for restore
+        dotnet restore  # Use the .sln file for restore
 
     - name: Build and run Roslyn analyzers
-      working-directory: "CPSC 362 Group Project V1"  # Correct relative path to subfolder
+      working-directory: "CPSC 362 Group Project V1" 
       run: |
         ls  # List files in this directory to confirm the .sln file is there
-        dotnet build "CPSC 362 Group Project V1.sln" --no-restore -warnaserror  # Use the .sln file for build
+        dotnet build --no-restore -warnaserror 
