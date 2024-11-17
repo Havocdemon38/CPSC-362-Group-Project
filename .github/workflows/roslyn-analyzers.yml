@@ -16,17 +16,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: List directory structure (for debugging)
+      run: |
+        ls -R  # List the directory structure recursively to verify file locations
+
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '9.0'
 
     - name: Install dependencies
-      working-directory: "CPSC-362-Group-Project/CPSC 362 Group Project V1"  # Specify the path to the subfolder
-      run:
-        dotnet restore "CPSC 362 Group Project V1.sln"
+      working-directory: "CPSC 362 Group Project V1"  # Correct relative path to subfolder
+      run: |
+        ls  # List files in this directory to confirm the .sln file is there
+        dotnet restore "CPSC 362 Group Project V1.sln"  # Use the .sln file for restore
 
     - name: Build and run Roslyn analyzers
-      working-directory: "CPSC-362-Group-Project/CPSC 362 Group Project V1"  # Specify the path to the subfolder
-      run:
-        dotnet build "CPSC 362 Group Project V1.sln" --no-restore -warnaserror
+      working-directory: "CPSC 362 Group Project V1"  # Correct relative path to subfolder
+      run: |
+        ls  # List files in this directory to confirm the .sln file is there
+        dotnet build "CPSC 362 Group Project V1.sln" --no-restore -warnaserror  # Use the .sln file for build
