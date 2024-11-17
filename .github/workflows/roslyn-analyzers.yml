@@ -22,9 +22,11 @@ jobs:
         dotnet-version: '9.0'
 
     - name: Install dependencies
-      working-directory: "CPSC-362-Group-Project/CPSC 362 Group Project V1"
-      run: dotnet restore "Assembly-CSharp.csproj"
+      working-directory: "CPSC-362-Group-Project/CPSC 362 Group Project V1"  # Specify the path to the subfolder
+      run:
+        dotnet restore "CPSC 362 Group Project V1.sln"
 
     - name: Build and run Roslyn analyzers
-      working-directory: ""CPSC-362-Group-Project/CPSC 362 Group Project V1""
-      run: dotnet build "Assembly-CSharp.csproj" --no-restore -warnaserror
+      working-directory: "CPSC-362-Group-Project/CPSC 362 Group Project V1"  # Specify the path to the subfolder
+      run:
+        dotnet build "CPSC 362 Group Project V1.sln" --no-restore -warnaserror
