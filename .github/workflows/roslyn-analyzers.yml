@@ -23,8 +23,10 @@ jobs:
 
     - name: Install dependencies
       working-directory: "CPSC 362 Group Project V1"
+      ls
       run: dotnet restore "CPSC 362 Group Project V1/Assembly-CSharp.csproj"
 
     - name: Build and run Roslyn analyzers
       working-directory: "CPSC 362 Group Project V1"
+      ls
       run: dotnet build "CPSC 362 Group Project V1/Assembly-CSharp.csproj" --no-restore -warnaserror
