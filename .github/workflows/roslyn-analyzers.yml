@@ -22,7 +22,11 @@ jobs:
         dotnet-version: '9.0'
 
     - name: Install dependencies
-      run: dotnet restore
+      run: |
+        cd "CPSC-362-Group-Project/CPSC 362 Group Project V1/Assets/Scripts"
+        dotnet restore
 
     - name: Build and run Roslyn analyzers
-      run: dotnet build --no-restore -warnaserror
+      run: |
+        cd "CPSC-362-Group-Project/CPSC 362 Group Project V1/Assets/Scripts"
+        dotnet build --no-restore -warnaserror
