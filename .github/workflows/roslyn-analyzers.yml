@@ -29,10 +29,10 @@ jobs:
       working-directory: "CPSC 362 Group Project V1" 
       run: |
         ls
-        dotnet restore  
+        dotnet "Assembly-CSharp.csproj"  restore  
 
     - name: Build and run Roslyn analyzers
       working-directory: "CPSC 362 Group Project V1" 
       run: |
         ls  # List files in this directory to confirm the .sln file is there
-        dotnet build --no-restore -warnaserror 
+        dotnet build "Assembly-CSharp.csproj"  --no-restore -warnaserror 
