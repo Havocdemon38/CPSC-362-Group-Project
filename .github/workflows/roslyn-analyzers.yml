@@ -28,9 +28,9 @@ jobs:
     - name: Install dependencies
       run: |
         cd "CPSC 362 Group Project V1"
-        dotnet restore "CPSC 362 Group Project V1.sln" 
+        dotnet restore "CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" 
 
     - name: Build and run Roslyn analyzers
       run: |
         cd "CPSC 362 Group Project V1"
-        dotnet build "CPSC 362 Group Project V1.sln" --no-restore -warnaserror 
+        dotnet build "CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" --no-restore -warnaserror 
