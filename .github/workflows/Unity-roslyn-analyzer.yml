@@ -21,7 +21,7 @@ jobs:
 
       # Set up Unity
       - name: Setup Unity
-        uses: game-ci/unity-action@v2
+        uses: unity-action/setup@v2
         with:
           version: '2022.3.48f1'  # Specify your Unity version
 
