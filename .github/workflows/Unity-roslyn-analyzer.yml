@@ -1,0 +1,36 @@
+name: Unity CI with Roslyn Analyzers
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Unity
+    - name: Set up Unity
+      uses: game-ci/unity-action@v2
+      with:
+        unityVersion: 2021.3.0f1 # Replace with your Unity version
+
+    # Step 3: Restore dependencies for Roslyn Analyzers
+    - name: Restore .NET dependencies
+      run: dotnet restore CPSC\ 362\ Group\ Project\ V1/Assembly-CSharp.csproj
+
+    # Step 4: Run Roslyn Analyzers on C# scripts
+    - name: Run Roslyn Analyzers
+      run: dotnet build CPSC\ 362\ Group\ Project\ V1/Assembly-CSharp.csproj --no-restore -warnaserror
+
+    # Step 5: Build Unity project
+    - name: Build the Unity project
+      run: unity -projectPath "CPSC-362-Group-Project/CPSC 362 Group Project V1" -batchmode -nographics -quit -logFile -buildTarget StandaloneWindows64
