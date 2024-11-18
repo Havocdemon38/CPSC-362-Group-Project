@@ -33,8 +33,8 @@ jobs:
 
       # Restore dependencies using MSBuild
       - name: Restore dependencies
-        run: msbuild ./CPSC-362-Group-Project/CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln /t:Restore
+        run: msbuild "./CPSC-362-Group-Project/CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" /t:Restore
 
       # Run Roslyn analyzers
       - name: Build and Lint Project
-        run: msbuild ./CPSC-362-Group-Project/CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
+        run: msbuild "./CPSC-362-Group-Project/CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
