@@ -23,6 +23,14 @@ jobs:
       - name: Install Visual Studio Build Tools
         uses: microsoft/setup-msbuild@v1
 
+      # List the files in the root directory (debugging step)
+      - name: List files in root directory
+        run: dir
+
+      # List files in the subfolder (to confirm the path to the .sln file)
+      - name: List files in subfolder
+        run: dir "./CPSC-362-Group-Project/CPSC 362 Group Project V1"
+
       # Install NuGet CLI (if necessary)
       - name: Install NuGet CLI
         run: choco install nuget.commandline -y
