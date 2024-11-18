@@ -26,7 +26,7 @@ jobs:
 
       - name: Install Unity
         run: |
-          UnityHub --headless install --version 2022.3.48f1
+          unity-hub --headless install --version 2022.3.48f1
 
       # Run Unity in batch mode to call the static method 'Build.PerformLinting'
       - name: Run Unity batch mode
