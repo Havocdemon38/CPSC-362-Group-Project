@@ -11,24 +11,22 @@ on:
 
 jobs:
   lint:
-    name: Run Roslyn Analyzers
-    runs-on: ubuntu-latest
+    name: Run Roslyn Analyzers on .NET Framework
+    runs-on: windows-latest
 
     steps:
       # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup .NET (required for Roslyn analyzers)
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 4.0  # Specify the required .NET version for your Unity project
+      # Setup Visual Studio (required for .NET Framework projects)
+      - name: Setup Visual Studio
+        uses: microsoft/setup-msbuild@v1
 
-      # Restore NuGet dependencies
+      # Restore NuGet packages
       - name: Restore dependencies
-        run: dotnet restore ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln
+        run: nuget restore ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln
 
-      # Run Roslyn analyzers
-      - name: Run Roslyn Analyzer
-        run: dotnet build ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln --no-restore -warnaserror
+      # Run Roslyn analyzers using MSBuild
+      - name: Build and Lint Project
+        run: msbuild ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
