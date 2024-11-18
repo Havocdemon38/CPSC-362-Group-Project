@@ -19,6 +19,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Install Visual Studio Build Tools (includes MSBuild)
+      - name: Install Visual Studio Build Tools
+        uses: microsoft/setup-msbuild@v1
+
       # Install NuGet CLI (if necessary)
       - name: Install NuGet CLI
         run: choco install nuget.commandline -y
