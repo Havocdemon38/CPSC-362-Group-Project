@@ -1,36 +1,34 @@
-name: Unity CI with Roslyn Analyzers
+name: Unity Roslyn Analyzer
 
 on:
   push:
     branches:
       - main
+      - develop
   pull_request:
     branches:
       - main
 
 jobs:
-  build:
-    runs-on: windows-latest
+  lint:
+    name: Run Roslyn Analyzers
+    runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Check out the repository
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Step 2: Set up Unity
-    - name: Set up Unity
-      uses: game-ci/unity-action@v2
-      with:
-        unityVersion: 2022.3.48f1 # Replace with your Unity version
+      # Setup .NET (required for Roslyn analyzers)
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 4.7.1  # Specify the required .NET version for your Unity project
 
-    # Step 3: Restore dependencies for Roslyn Analyzers
-    - name: Restore .NET dependencies
-      run: dotnet restore CPSC\ 362\ Group\ Project\ V1/Assembly-CSharp.csproj
+      # Restore NuGet dependencies
+      - name: Restore dependencies
+        run: dotnet restore ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln
 
-    # Step 4: Run Roslyn Analyzers on C# scripts
-    - name: Run Roslyn Analyzers
-      run: dotnet build CPSC\ 362\ Group\ Project\ V1/Assembly-CSharp.csproj --no-restore -warnaserror
-
-    # Step 5: Build Unity project
-    - name: Build the Unity project
-      run: unity -projectPath "CPSC-362-Group-Project/CPSC 362 Group Project V1" -batchmode -nographics -quit -logFile -buildTarget StandaloneWindows64
+      # Run Roslyn analyzers
+      - name: Run Roslyn Analyzer
+        run: dotnet build ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln --no-restore -warnaserror
