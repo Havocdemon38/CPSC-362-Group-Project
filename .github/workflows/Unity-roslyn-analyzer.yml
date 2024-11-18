@@ -1,5 +1,4 @@
 name: Unity Roslyn Analyzer
-name: Code Linting for Unity Project
 
 on:
   push:
