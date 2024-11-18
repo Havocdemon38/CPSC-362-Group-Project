@@ -1,4 +1,5 @@
 name: Unity Roslyn Analyzer
+name: Code Linting for Unity Project
 
 on:
   push:
@@ -19,17 +20,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Unity
-      - name: Setup Unity
-        uses: unity-action/setup@v2
-        with:
-          version: '2022.3.48f1'  # Specify your Unity version
+      # Install Unity using Unity Hub
+      - name: Install Unity
+        run: |
+          choco install unity --version=2022.3.48f1 --package-parameters "--accept-license --no-progress"
+      
+      # Set Unity environment variables (if needed)
+      - name: Set up Unity environment
+        run: |
+          setx UNITY_PATH "C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor"
 
       # List files in the subfolder (to confirm the path to the .sln file)
       - name: List files in subfolder
         run: dir "./CPSC 362 Group Project V1"
 
-      # Run Unity batch mode to call the static method 'Build.PerformLinting'
+      # Run Unity in batch mode to call the static method 'Build.PerformLinting'
       - name: Run Unity batch mode to execute linting
         run: |
-          Unity.exe -batchmode -projectPath "./CPSC 362 Group Project V1" -quit -executeMethod Build.PerformLinting
+          "C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Unity.exe" -batchmode -projectPath "./CPSC 362 Group Project V1" -quit -executeMethod Build.PerformLinting
