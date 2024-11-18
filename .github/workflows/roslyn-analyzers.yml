@@ -20,6 +20,11 @@ jobs:
       run: |
         ls -R  # List the directory structure recursively to verify file locations
 
+- name: Set up Unity
+      uses: game-ci/unity-action@v2
+      with:
+        unityVersion: 2022.3.48f1
+
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -33,6 +38,4 @@ jobs:
 
     - name: Build and run Roslyn analyzers
       working-directory: "CPSC 362 Group Project V1" 
-      run: |
-        ls
-        dotnet build "CPSC 362 Group Project V1.sln" --no-restore -warnaserror 
+      run: unity -projectPath "CPSC-362-Group-Project/CPSC 362 Group Project V1" -batchmode -nographics -quit -logFile -buildTarget StandaloneWindows64
