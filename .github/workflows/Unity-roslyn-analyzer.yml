@@ -19,14 +19,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup Visual Studio (required for .NET Framework projects)
-      - name: Setup Visual Studio
-        uses: microsoft/setup-msbuild@v1
+      # Install NuGet CLI (if necessary)
+      - name: Install NuGet CLI
+        run: choco install nuget.commandline -y
 
-      # Restore NuGet packages
+      # List files in the repository (debugging step)
+      - name: List repository files
+        run: dir
+
+      # Restore dependencies using MSBuild
       - name: Restore dependencies
-        run: nuget restore ./CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln
+        run: msbuild ./CPSC-362-Group-Project/CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln /t:Restore
 
-      # Run Roslyn analyzers using MSBuild
+      # Run Roslyn analyzers
       - name: Build and Lint Project
-        run: msbuild ./CPSC3 62 Group Project V1/CPSC 362 Group Project V1.sln /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
+        run: msbuild ./CPSC-362-Group-Project/CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
