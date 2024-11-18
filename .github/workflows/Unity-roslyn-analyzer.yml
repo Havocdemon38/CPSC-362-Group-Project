@@ -11,24 +11,30 @@ on:
 
 jobs:
   lint:
-    name: Run Unity in Batch Mode
-    runs-on: windows-latest
+    name: Lint and Build Unity Project
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout the repository
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Install Unity using Unity Hub
-      - name: Install Unity Hub
-        run: |
-          choco install unity-hub
+      # Set up Unity using game-ci/unity-setup
+      - name: Setup Unity
+        uses: game-ci/unity-setup@v2
+        with:
+          unityVersion: 2022.3.48f1 # Match this to your Unity project version
+          activationMode: manual
+          license: ${{ secrets.UNITY_LICENSE }}
 
-      - name: Install Unity
-        run: |
-          unity-hub.exe --headless install --version 2022.3.48f1
+      # Restore dependencies (if applicable)
+      - name: Restore dependencies
+        run: unity -quit -batchmode -logfile -projectPath "./CPSC 362 Group Project V1" -executeMethod UnityEditor.Compilation.CompilationPipeline
 
-      # Run Unity in batch mode to call the static method 'Build.PerformLinting'
-      - name: Run Unity batch mode
-        run: |
-          "C:\Program Files\Unity\Hub\Editor\2022.3.48f1\Editor\Unity.exe" -batchmode -projectPath "./CPSC 362 Group Project V1" -quit -executeMethod Build.PerformLinting
+      # Run Roslyn analyzers (optional, if analyzers are part of the Unity project)
+      - name: Run Roslyn Analyzer (optional)
+        run: msbuild "./CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" /p:RunAnalyzers=true /warnaserror
+
+      # Build the project
+      - name: Build Unity Project
+        run: unity -quit -batchmode -logfile -projectPath "./CPSC 362 Group Project V1" -buildTarget StandaloneWindows64 -outputDirectory Build
