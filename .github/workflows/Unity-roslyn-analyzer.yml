@@ -25,8 +25,8 @@ jobs:
 
       # Restore NuGet packages
       - name: Restore dependencies
-        run: nuget restore ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln
+        run: nuget restore ./CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln
 
       # Run Roslyn analyzers using MSBuild
       - name: Build and Lint Project
-        run: msbuild ./CPSC-362-Group-Project/CPSC 362 Group Project V1.sln /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
+        run: msbuild ./CPSC3 62 Group Project V1/CPSC 362 Group Project V1.sln /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
