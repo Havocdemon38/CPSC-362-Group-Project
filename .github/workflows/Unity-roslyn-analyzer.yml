@@ -21,7 +21,7 @@ jobs:
     - name: Set up Unity
       uses: game-ci/unity-action@v2
       with:
-        unityVersion: 2021.3.0f1 # Replace with your Unity version
+        unityVersion: 2022.3.48f1 # Replace with your Unity version
 
     # Step 3: Restore dependencies for Roslyn Analyzers
     - name: Restore .NET dependencies
