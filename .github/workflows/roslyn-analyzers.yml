@@ -15,12 +15,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
-    - name: List directory structure (for debugging)
-      run: |
-        ls -R
 	
-	- name: Set up Unity
+    - name: Set up Unity
       uses: game-ci/unity-action@v2
       with:
         unityVersion: 2022.3.48f1
