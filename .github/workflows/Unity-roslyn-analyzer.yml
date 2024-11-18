@@ -11,7 +11,7 @@ on:
 
 jobs:
   lint:
-    name: Run Roslyn Analyzers on .NET Framework
+    name: Run Unity in Batch Mode
     runs-on: windows-latest
 
     steps:
@@ -19,30 +19,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Install Visual Studio Build Tools (includes MSBuild)
-      - name: Install Visual Studio Build Tools
-        uses: microsoft/setup-msbuild@v1
-
-      # List the files in the root directory (debugging step)
-      - name: List files in root directory
-        run: dir
+      # Set up Unity
+      - name: Setup Unity
+        uses: game-ci/unity-action@v2
+        with:
+          version: '2022.3.48f1'  # Specify your Unity version
 
       # List files in the subfolder (to confirm the path to the .sln file)
       - name: List files in subfolder
         run: dir "./CPSC 362 Group Project V1"
 
-      # Install NuGet CLI (if necessary)
-      - name: Install NuGet CLI
-        run: choco install nuget.commandline -y
-
-      # List files in the repository (debugging step)
-      - name: List repository files
-        run: dir
-
-      # Restore dependencies using MSBuild
-      - name: Restore dependencies
-        run: msbuild "./CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" /t:Restore
-
-      # Run Roslyn analyzers
-      - name: Build and Lint Project
-        run: msbuild "./CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" /p:RunAnalyzers=true /p:Configuration=Release /warnaserror
+      # Run Unity batch mode to call the static method 'Build.PerformLinting'
+      - name: Run Unity batch mode to execute linting
+        run: |
+          Unity.exe -batchmode -projectPath "./CPSC 362 Group Project V1" -quit -executeMethod Build.PerformLinting

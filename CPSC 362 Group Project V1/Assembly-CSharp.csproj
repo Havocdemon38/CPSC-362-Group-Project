@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\FinishLine.cs" />
     <Compile Include="Assets\Scripts\DeathScript.cs" />
+    <Compile Include="Assets\Scripts\Build.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
