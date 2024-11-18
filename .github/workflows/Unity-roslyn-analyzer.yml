@@ -20,20 +20,15 @@ jobs:
         uses: actions/checkout@v3
 
       # Install Unity using Unity Hub
+      - name: Install Unity Hub
+        run: |
+          choco install unity-hub
+
       - name: Install Unity
         run: |
-          choco install unity --version=2022.3.48f1 --package-parameters "--accept-license --no-progress"
-      
-      # Set Unity environment variables (if needed)
-      - name: Set up Unity environment
-        run: |
-          setx UNITY_PATH "C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor"
-
-      # List files in the subfolder (to confirm the path to the .sln file)
-      - name: List files in subfolder
-        run: dir "./CPSC 362 Group Project V1"
+          UnityHub --headless install --version 2022.3.48f1
 
       # Run Unity in batch mode to call the static method 'Build.PerformLinting'
-      - name: Run Unity batch mode to execute linting
+      - name: Run Unity batch mode
         run: |
-          "C:\Program Files\Unity\Hub\Editor\2021.3.17f1\Editor\Unity.exe" -batchmode -projectPath "./CPSC 362 Group Project V1" -quit -executeMethod Build.PerformLinting
+          "C:\Program Files\Unity\Hub\Editor\2022.3.48f1\Editor\Unity.exe" -batchmode -projectPath "./CPSC 362 Group Project V1" -quit -executeMethod Build.PerformLinting
