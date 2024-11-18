@@ -23,7 +23,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 4.7.1  # Specify the required .NET version for your Unity project
+          dotnet-version: 4.0  # Specify the required .NET version for your Unity project
 
       # Restore NuGet dependencies
       - name: Restore dependencies
