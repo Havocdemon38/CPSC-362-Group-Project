@@ -1,0 +1,54 @@
+
+name: Build Unity and Lint code
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build Unity and Lint
+    runs-on: windows-latest
+    steps:
+    
+      # Checkout Code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # Cache (Not Working (Probably works on Ubuntu))
+      - uses: actions/cache@v3
+        with:
+          path: "CPSC 362 Group Project V1"
+          key: Library-MyProjectName-TargetPlatform
+          restore-keys: |
+            Library-MyProjectName-
+            Library-
+          
+      # Install .NET SDK for Analyzers
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0
+          
+      # Build Unity
+      - name: Build project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: "CPSC 362 Group Project V1"
+          targetPlatform: StandaloneWindows64
+          allowDirtyBuild: true
+          
+      # Run Lint
+      - name: Run Code Analysis
+        run: |
+          dotnet build "CPSC 362 Group Project V1/CPSC 362 Group Project V1.sln" --no-restore /p:RunAnalyzers=true
+
+      # Output
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: build
