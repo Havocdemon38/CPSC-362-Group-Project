@@ -16,13 +16,13 @@ jobs:
           lfs: true
 
       # Cache (Not Working (Probably works on Ubuntu))
-      - uses: actions/cache@v3
-        with:
-          path: "CPSC 362 Group Project V1"
-          key: Library-MyProjectName-TargetPlatform
-          restore-keys: |
-            Library-MyProjectName-
-            Library-
+      #- uses: actions/cache@v3
+      #  with:
+      #    path: "CPSC 362 Group Project V1"
+      #    key: Library-MyProjectName-TargetPlatform
+      #    restore-keys: |
+      #      Library-MyProjectName-
+      #      Library-
           
       # Install .NET SDK for Analyzers
       - name: Install .NET SDK
