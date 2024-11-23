@@ -25,7 +25,7 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
-          FILTER_REGEX_EXCLUDE: .*README.md.*
+          FILTER_REGEX_EXCLUDE: .*README.md.*|.*CPSC 362 Group Project V1/Packages/Microsoft.Unity.Analyzers.1.21.0/tools/install.ps1.*|.*CPSC 362 Group Project V1/Packages/Microsoft.Unity.Analyzers.1.21.0/tools/uninstall.ps1.*
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
