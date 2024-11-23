@@ -25,7 +25,7 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
-          FILTER_REGEX_EXCLUDE: '^(README\\.md|install\\.ps1|uninstall\\.ps1)$'
+          FILTER_REGEX_EXCLUDE: .*README.md.*|
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
